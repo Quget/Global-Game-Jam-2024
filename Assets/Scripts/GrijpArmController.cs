@@ -15,6 +15,8 @@ public class GrijpArmController : MonoBehaviour
     private enum move { down, up, none };
     private move GrijpBeweging;
     private Vector2 NewPosition;
+    public bool grabbing;
+    private GameObject Object;
     
 
     // Start is called before the first frame update
@@ -23,6 +25,7 @@ public class GrijpArmController : MonoBehaviour
         StartPosition = GrijpArm.position;
         GrijpBeweging = move.none;
         NewPosition = StartPosition;
+        grabbing = false;
     }
 
     public void MoveDown()
@@ -33,6 +36,7 @@ public class GrijpArmController : MonoBehaviour
     public void MoveUp()
     {
         GrijpBeweging = move.up;
+
     }
 
     // Update is called once per frame
@@ -40,6 +44,7 @@ public class GrijpArmController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) MoveDown();
         if (Input.GetKeyDown(KeyCode.Alpha2)) MoveUp();
+        if (grabbing) Object.transform.position = GrijpArm.position;
         
     }
     private void FixedUpdate()
@@ -58,8 +63,20 @@ public class GrijpArmController : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-          GrijpBeweging = move.none;
+        GrijpBeweging = move.none;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "object")
+        {
+            //grab object
+            grabbing = true;
+            Object = collision.gameObject;
+
+        }
+    }
+   
 }

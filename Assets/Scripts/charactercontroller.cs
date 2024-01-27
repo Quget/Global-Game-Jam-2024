@@ -12,6 +12,8 @@ public class charactercontroller : MonoBehaviour
     public enum PlayerType { left,right};
     public PlayerType playerType;
     public bool HoldItem;
+    public float LookDirectionX;
+    public float LookDirectionY;
 
     private Vector2 direction;
 
@@ -20,6 +22,12 @@ public class charactercontroller : MonoBehaviour
     {
         direction = new Vector2();
         HoldItem = false;
+        
+        }
+
+    private void Update()
+    {
+       
     }
 
     // Update is called once per frame
@@ -58,6 +66,8 @@ public class charactercontroller : MonoBehaviour
         }
 
         rigidBody.MovePosition(rigidBody.position + direction * Time.deltaTime * speed);
+        if(direction.x != 0) LookDirectionX = direction.x;
+        if (direction.y != 0) LookDirectionY = direction.y;
         direction.x = 0;
         direction.y = 0;
     }
