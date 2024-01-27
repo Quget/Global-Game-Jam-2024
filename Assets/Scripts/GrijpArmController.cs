@@ -14,6 +14,8 @@ public class GrijpArmController : MonoBehaviour
     public float speed = 0.05f;
     [SerializeField]
     private Transform itemHolder;private GameObject item;
+    [SerializeField]
+    private BoxCollider2D TargetZone;
     public Vector3 OffSet = new Vector3(0,-0.77f,0);
     
     private Vector2 StartPosition;
@@ -37,6 +39,7 @@ public class GrijpArmController : MonoBehaviour
     public void MoveDown()
     {
         GrijpBeweging = move.down;
+        TargetZone.enabled = false;
     }
 
     public void MoveUp()
@@ -48,6 +51,7 @@ public class GrijpArmController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Alpha1)) 
             MoveDown();
 
@@ -85,11 +89,20 @@ public class GrijpArmController : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2d(Collision2D collision)
     {
-        //weggooi code aanroepen
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Bovenkant"))
+            {
+            //weggooi code aanroepen
 
-        GrijpBeweging = move.none;
+            //
+            item.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            item.transform.parent = null;
+            item = null;
+            //
+            TargetZone.enabled= true;
+            GrijpBeweging = move.none;
+        }
     }
 
 
