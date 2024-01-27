@@ -14,6 +14,8 @@ public class GrijpArmController : MonoBehaviour
     public float speed = 0.05f;
     [SerializeField]
     private ItemController itemcontroller;
+    [SerializeField]
+    public Vector2 EndPosition = new Vector2(0f, 0f);
     public Vector3 OffSet = new Vector3(0,-0.77f,0);
     
     private Vector2 StartPosition;
@@ -23,9 +25,7 @@ public class GrijpArmController : MonoBehaviour
     public bool grabbing;
     private GameObject Object;
     private Rigidbody2D ItemRigidBody;
-    private bool grabbed;
-    
-    
+    public bool grabbed;
 
     // Start is called before the first frame update
     void Start()
@@ -51,16 +51,22 @@ public class GrijpArmController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) MoveDown();
-        if (Input.GetKeyDown(KeyCode.Alpha2)) MoveUp();
-        if (grabbing) Object.transform.position = GrijpArm.transform.position + OffSet;
+        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+            MoveDown();
+
+        if (Input.GetKeyDown(KeyCode.Alpha2)) 
+            MoveUp();
+        
         if((GrijpArm.position == StartPosition) && grabbing)
         {
             //Debug.Log("wegsmijten");
             grabbing = false;
             itemcontroller.Release(Right_Player);
-            grabbed = false;
-
+        }
+        else
+        {
+            if (grabbing) 
+                Object.transform.position = GrijpArm.transform.position + OffSet;
         }
         
     }
@@ -89,19 +95,20 @@ public class GrijpArmController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Itemlayer"))
         {
-            if (!grabbed)
-            {
                 //grab object
                 grabbed = true;
                 grabbing = true;
                 Object = collision.gameObject;
                 Object.transform.position = Object.transform.position + OffSet;
                 MoveUp(); 
-            }
-
         }
-
-        
     }
-   
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Itemlayer"))
+        {
+            grabbed = false;
+        }
+    }
+
 }

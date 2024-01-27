@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2824897265594550775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4476180518930608044}
+  m_Layer: 0
+  m_Name: itemholder
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4476180518930608044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824897265594550775}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5261699479065577547}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6551213538021851225
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +64,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1592192800788928692}
+  - {fileID: 4476180518930608044}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7651562524221939469
@@ -48,12 +80,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 4817699549181849361}
+  itemHolder: {fileID: 4476180518930608044}
   DirectionsMovement: {fileID: 2211997664627081328}
   speed: 5
+  ItemOffset: {x: -0.67, y: 0.3, z: 0}
+  itemcontroller: {fileID: 0}
   playerType: 0
   HoldItem: 0
   LookDirectionX: 0
   LookDirectionY: 0
+  direction: {x: 0, y: 0}
 --- !u!50 &4817699549181849361
 Rigidbody2D:
   serializedVersion: 4
@@ -62,7 +98,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6551213538021851225}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -80,7 +116,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7191181134262752935
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -113,7 +149,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.47}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -124,7 +160,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.67, y: 0.97}
   m_EdgeRadius: 0
 --- !u!1001 &161873598689203167
 PrefabInstance:
@@ -177,6 +213,30 @@ PrefabInstance:
     - target: {fileID: 1452285280162089835, guid: addea8370304c1548a663796ef87061b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968163385405207414, guid: addea8370304c1548a663796ef87061b, type: 3}
+      propertyPath: translator.layerMixModes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968163385405207414, guid: addea8370304c1548a663796ef87061b, type: 3}
+      propertyPath: translator.layerBlendModes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968163385405207414, guid: addea8370304c1548a663796ef87061b, type: 3}
+      propertyPath: translator.layerMixModes.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968163385405207414, guid: addea8370304c1548a663796ef87061b, type: 3}
+      propertyPath: translator.layerMixModes.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968163385405207414, guid: addea8370304c1548a663796ef87061b, type: 3}
+      propertyPath: translator.layerBlendModes.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968163385405207414, guid: addea8370304c1548a663796ef87061b, type: 3}
+      propertyPath: translator.layerBlendModes.Array.data[2]
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5287345469792461004, guid: addea8370304c1548a663796ef87061b, type: 3}
       propertyPath: m_Name

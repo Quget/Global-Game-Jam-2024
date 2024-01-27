@@ -227,7 +227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4817699549181849361, guid: 74fc2057169c6854cb02a65035afff0b, type: 3}
       propertyPath: m_BodyType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5261699479065577547, guid: 74fc2057169c6854cb02a65035afff0b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -277,6 +277,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+    - target: {fileID: 7191181134262752935, guid: 74fc2057169c6854cb02a65035afff0b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.7223177
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191181134262752935, guid: 74fc2057169c6854cb02a65035afff0b, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.02615881
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191181134262752935, guid: 74fc2057169c6854cb02a65035afff0b, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.47000003
+      objectReference: {fileID: 0}
     - target: {fileID: 7191181134262752935, guid: 74fc2057169c6854cb02a65035afff0b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.y
       value: 0.28866667
@@ -367,7 +379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1037895428
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -493,6 +505,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac8ce3c6fa66744479858f4c923740f0, type: 3}
+--- !u!61 &1384655884 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5686183867529564533, guid: e8d5770bb166b1b4a9fb23b925f6027d, type: 3}
+  m_PrefabInstance: {fileID: 1823705756}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1550866811
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,6 +689,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 344714350245978549, guid: e8d5770bb166b1b4a9fb23b925f6027d, type: 3}
+      propertyPath: colider
+      value: 
+      objectReference: {fileID: 1384655884}
+    - target: {fileID: 344714350245978549, guid: e8d5770bb166b1b4a9fb23b925f6027d, type: 3}
       propertyPath: rigidBody
       value: 
       objectReference: {fileID: 5017535}
@@ -682,6 +703,14 @@ PrefabInstance:
     - target: {fileID: 886482468821541274, guid: e8d5770bb166b1b4a9fb23b925f6027d, type: 3}
       propertyPath: m_Name
       value: GijsObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 4393861086977521765, guid: e8d5770bb166b1b4a9fb23b925f6027d, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686183867529564533, guid: e8d5770bb166b1b4a9fb23b925f6027d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -954,6 +983,14 @@ PrefabInstance:
       propertyPath: Right_Player
       value: 
       objectReference: {fileID: 313054613}
+    - target: {fileID: 2204098042305024551, guid: ecbf6805bd04a2e47a09866ad26a17a4, type: 3}
+      propertyPath: EndPosition.x
+      value: -4.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2204098042305024551, guid: ecbf6805bd04a2e47a09866ad26a17a4, type: 3}
+      propertyPath: EndPosition.y
+      value: -1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2204098042305024551, guid: ecbf6805bd04a2e47a09866ad26a17a4, type: 3}
       propertyPath: itemcontroller
       value: 
