@@ -6,7 +6,6 @@ public class charactercontroller : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody2D rigidBody;
-    //private CharacterController characterController;
     [SerializeField]
     public float speed = 5f;
 
