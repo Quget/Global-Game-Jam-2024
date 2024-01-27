@@ -347,10 +347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92595379f21736b409313ccf99acc966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combinedItems:
-  - {fileID: 7770145849289313387, guid: 98c549df8bbd3664fbdd9ed277a657fc, type: 3}
-  tag1: Feather
-  tag2: Plant
 --- !u!212 &858697766
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -643,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538db2755fbf31e48a7c34693fb0a7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conveyorSpeed: 2.5
+  conveyorSpeed: 2
 --- !u!61 &1532834944
 BoxCollider2D:
   m_ObjectHideFlags: 0

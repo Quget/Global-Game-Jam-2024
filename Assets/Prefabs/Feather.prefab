@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2422939401608954518}
   - component: {fileID: 3438631944558895834}
   - component: {fileID: -1729655701991004945}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Feather
   m_TagString: Feather
   m_Icon: {fileID: 0}
