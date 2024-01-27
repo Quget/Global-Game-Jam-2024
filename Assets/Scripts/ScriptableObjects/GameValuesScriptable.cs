@@ -9,6 +9,8 @@ public class GameValuesScriptable :ScriptableObject
 	public float MaxLaughter = 100;
 	public float LaughterDecreaseRatePerSecond = 0.5f;
 	public float LaughterStart;
+	public int NewAssignmentAfterSecondsMin = 30;
+	public int NewAssignmentAfterSecondsMax = 50;
 	public Assignment[] Assignments;
 	public GameObject[] Items;
 	public GameObject[] CombinedItems;

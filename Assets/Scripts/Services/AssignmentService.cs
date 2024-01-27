@@ -18,6 +18,12 @@ public class AssignmentService: IServiceAble
 		CurrentAssignment = assignment;
 	}
 
+	public void NewRandomAssignment()
+	{
+		var currentAssignment = GetRandomAssignment();
+		SetAssignment(currentAssignment);
+	}
+
 	public Assignment GetRandomAssignment()
 	{
 		return _gameValueService.GameValues.Assignments[Random.Range(0, _gameValueService.GameValues.Assignments.Length)];
