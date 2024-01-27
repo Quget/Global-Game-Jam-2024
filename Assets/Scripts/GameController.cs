@@ -5,19 +5,47 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    private LaughterBar laughterBar = null;
+	public static GameController Instance { get; private set; }
 
-    private void Awake()
+	private AssignmentService _assignmentService;
+
+	private LaughterBar laughterBar = null;
+
+	private float laughter = 0;
+	public float Laughter
+	{
+		get
+		{
+			return laughter;
+		}
+		set
+		{
+			laughter = value;
+			laughterBar.SetLaughter(value);
+		}
+	}
+
+	private void Awake()
     {
+		if (Instance != null && GameController.Instance != this)
+		{
+			Destroy(Instance.gameObject);
+			return;
+		}
+		Instance = this;
+		_assignmentService = Services.Instance.GetService<AssignmentService>();
+
 		laughterBar = FindObjectOfType<LaughterBar>();
-        laughterBar.SetUpSlider();
+		Laughter = 50;
+
+		laughterBar.SetUpSlider();
+		
 	}
 
 	private void Start()
 	{
-		laughterBar.UpdateLaughter(40);
-
-		Debug.Log(Services.Instance.GetService<AssignmentService>().GetRandomAssignment().ResultItemTag);
+		var currentAssignment = _assignmentService.GetRandomAssignment();
+		_assignmentService.SetAssignment(currentAssignment);
 	}
 
 	private void Update()
@@ -26,5 +54,11 @@ public class GameController : MonoBehaviour
 		{
 			SceneManager.LoadScene(0);
 		}
+	}
+
+	private void OnDestroy()
+	{
+		if (Instance == this)
+			Instance = null;
 	}
 }

@@ -7,9 +7,15 @@ using UnityEngine;
 public class AssignmentService: IServiceAble
 {
 	private readonly GameValueService _gameValueService;
+	public Assignment CurrentAssignment { get; private set; }
 	public AssignmentService()
 	{
 		_gameValueService = Services.Instance.GetService<GameValueService>();
+	}
+
+	public void SetAssignment(Assignment assignment)
+	{
+		CurrentAssignment = assignment;
 	}
 
 	public Assignment GetRandomAssignment()

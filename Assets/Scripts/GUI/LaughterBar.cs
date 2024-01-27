@@ -8,12 +8,6 @@ public class LaughterBar : MonoBehaviour
     [SerializeField]
     private Slider slider;
 	private GameValueService _gameValueService;
-
-	private void Awake()
-	{
-		
-	}
-
 	public void SetUpSlider()
     {
 		_gameValueService = Services.Instance.GetService<GameValueService>();
@@ -25,9 +19,32 @@ public class LaughterBar : MonoBehaviour
 	/// <summary>
 	/// Between 0 and gameValues.MaxLaughter;
 	/// </summary>
-	/// <param name="percentage"></param>
-	public void UpdateLaughter(float percentage)
+	/// <param name="value"></param>
+	public void SetLaughter(float value)
     {
-		slider.value = percentage;
+		slider.value = value;
+	}
+
+	public void AddLaughter(float value)
+	{
+		float newValue = slider.value + value;
+		if(newValue > slider.maxValue)
+		{
+			slider.value = slider.maxValue;
+			return;
+		}
+
+		if (newValue < 0)
+		{
+			slider.value = 0;
+			return;
+		}
+
+		slider.value = newValue;
+	}
+
+	public float GetLaughter()
+	{
+		return slider.value;
 	}
 }

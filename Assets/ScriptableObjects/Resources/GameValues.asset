@@ -16,9 +16,9 @@ MonoBehaviour:
   LaughterDecreaseRate: 0.5
   Assignments:
   - ItemTags:
-    - test
-    - test2
-    ResultItemTag: tester
+    - Feather
+    - Plant
+    ResultItemTag: Laughing Plant
   Items:
   - {fileID: 3318003039857825777, guid: e3847fb6738cda54fbfff7bcb1e9c597, type: 3}
   - {fileID: 4503235215764235898, guid: 9fb7c341abda1064786d8f52ea09455f, type: 3}

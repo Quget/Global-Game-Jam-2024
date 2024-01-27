@@ -4,30 +4,27 @@ using UnityEngine;
 
 public class ItemChecker : MonoBehaviour
 {
-    private AssignmentService assignmentService;
+    private AssignmentService _assignmentService;
     private Assignment assignment;
-    private LaughterBar laughterBar = null;
 
-    void Start()
+    void Awake()
     {
-        assignmentService = Services.Instance.GetService<AssignmentService>();
-        assignment = assignmentService.GetRandomAssignment();
+		_assignmentService = Services.Instance.GetService<AssignmentService>();
+        ;
 
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == assignment.ResultItemTag)
+        if(col.tag == _assignmentService.CurrentAssignment.ResultItemTag)
         {
-            laughterBar.UpdateLaughter(+10);
+            GameController.Instance.Laughter += 10;
             Destroy(col.gameObject);
         }
 
-        if(col.tag != assignment.ResultItemTag)
+        if(col.tag != _assignmentService.CurrentAssignment.ResultItemTag)
         {
-            laughterBar.UpdateLaughter(-5);
-            Destroy(col.gameObject);
+			GameController.Instance.Laughter -= 5;
+			Destroy(col.gameObject);
         }
     }
-
-
 }
