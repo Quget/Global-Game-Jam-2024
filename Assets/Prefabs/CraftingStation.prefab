@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6372909950421084907}
   - component: {fileID: 4932344869112671385}
   - component: {fileID: 5328118854176579065}
+  - component: {fileID: 4051531000385120084}
   m_Layer: 0
   m_Name: CraftingStation
   m_TagString: Untagged
@@ -147,3 +148,58 @@ MonoBehaviour:
     layerMixModes: 01000000
     layerBlendModes: 01000000
   updateTiming: 1
+--- !u!60 &4051531000385120084
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329036777939880615}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 2.270198, y: 3.203279}
+      - {x: 0.17635977, y: 2.1057796}
+      - {x: -2.2222767, y: 3.170685}
+      - {x: -4.0657053, y: 1.8981078}
+      - {x: -2.306284, y: 0.71721566}
+      - {x: -1.7536943, y: -0.82082}
+      - {x: 0.0366354, y: -1.5888205}
+      - {x: 1.8343291, y: -0.69218445}
+      - {x: 2.2554257, y: 0.648885}
+      - {x: 4.2170134, y: 1.8797985}
+  m_UseDelaunayMesh: 0

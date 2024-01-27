@@ -5,7 +5,6 @@ using UnityEngine;
 public class ItemChecker : MonoBehaviour
 {
     private AssignmentService _assignmentService;
-    private Assignment assignment;
 
     void Awake()
     {
@@ -14,16 +13,18 @@ public class ItemChecker : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == _assignmentService.CurrentAssignment.ResultItemTag)
+        if (_assignmentService.CurrentAssignment.ResultItemTag != null && col.gameObject.layer == LayerMask.NameToLayer("Itemlayer"))
         {
-            GameController.Instance.Laughter += 10;
-            Destroy(col.gameObject);
-        }
+			if (col.tag == _assignmentService.CurrentAssignment.ResultItemTag)
+			{
+				GameController.Instance.Laughter += 10;
+			}
 
-        if(col.tag != _assignmentService.CurrentAssignment.ResultItemTag)
-        {
-			GameController.Instance.Laughter -= 5;
+			if (col.tag != _assignmentService.CurrentAssignment.ResultItemTag)
+			{
+				GameController.Instance.Laughter -= 5;
+			}
 			Destroy(col.gameObject);
-        }
+		}
     }
 }

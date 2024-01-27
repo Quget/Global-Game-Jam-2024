@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Combine : MonoBehaviour
 {
+    [SerializeField]
+    private Transform itemOutPosition;
+
     private GameValueService gameValueService;
     private bool instantiationDone = false;
     private List<Collider2D> collidersInside = new List<Collider2D>();
@@ -56,7 +59,7 @@ public class Combine : MonoBehaviour
                 {
                     if(assignment.ResultItemTag == combinedItem.tag)
                     {
-                        Instantiate(combinedItem, transform.position, Quaternion.identity);
+                        Instantiate(combinedItem, itemOutPosition.position, Quaternion.identity);
                         break;
                     }
                 }
