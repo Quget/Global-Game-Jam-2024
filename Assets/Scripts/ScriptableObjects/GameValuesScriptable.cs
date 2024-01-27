@@ -7,7 +7,8 @@ using UnityEngine;
 public class GameValuesScriptable :ScriptableObject
 {
 	public float MaxLaughter = 100;
-	public float LaughterDecreaseRate = 0.5f;
+	public float LaughterDecreaseRatePerSecond = 0.5f;
+	public float LaughterStart;
 	public Assignment[] Assignments;
 	public GameObject[] Items;
 	public GameObject[] CombinedItems;

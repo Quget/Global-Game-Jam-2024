@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: GameValues
   m_EditorClassIdentifier: 
   MaxLaughter: 100
-  LaughterDecreaseRate: 0.5
+  LaughterDecreaseRatePerSecond: 0.5
+  LaughterStart: 50
   Assignments:
   - ItemTags:
     - Feather

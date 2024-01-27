@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 	public static GameController Instance { get; private set; }
 
 	private AssignmentService _assignmentService;
+	private GameValueService _gameValueService;
 
 	private LaughterBar laughterBar = null;
 
@@ -25,6 +26,8 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	private float tickTimer = 0;
+
 	private void Awake()
     {
 		if (Instance != null && GameController.Instance != this)
@@ -33,17 +36,16 @@ public class GameController : MonoBehaviour
 			return;
 		}
 		Instance = this;
+
 		_assignmentService = Services.Instance.GetService<AssignmentService>();
+		_gameValueService = Services.Instance.GetService<GameValueService>();
 
 		laughterBar = FindObjectOfType<LaughterBar>();
-		Laughter = 50;
-
-		laughterBar.SetUpSlider();
-		
 	}
 
 	private void Start()
 	{
+		Laughter = _gameValueService.GameValues.LaughterStart;
 		var currentAssignment = _assignmentService.GetRandomAssignment();
 		_assignmentService.SetAssignment(currentAssignment);
 	}
@@ -53,6 +55,18 @@ public class GameController : MonoBehaviour
 		if(Input.GetKey(KeyCode.Escape))
 		{
 			SceneManager.LoadScene(0);
+		}
+
+		SecondTick();
+	}
+
+	private void SecondTick()
+	{
+		tickTimer += Time.deltaTime;
+		if (tickTimer >= 1)
+		{
+			Laughter -= _gameValueService.GameValues.LaughterDecreaseRatePerSecond;
+			tickTimer = 0;
 		}
 	}
 

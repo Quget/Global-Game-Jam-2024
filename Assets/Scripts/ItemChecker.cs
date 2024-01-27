@@ -10,9 +10,8 @@ public class ItemChecker : MonoBehaviour
     void Awake()
     {
 		_assignmentService = Services.Instance.GetService<AssignmentService>();
-        ;
-
     }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.tag == _assignmentService.CurrentAssignment.ResultItemTag)

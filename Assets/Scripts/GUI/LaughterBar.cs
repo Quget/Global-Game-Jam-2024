@@ -8,7 +8,7 @@ public class LaughterBar : MonoBehaviour
     [SerializeField]
     private Slider slider;
 	private GameValueService _gameValueService;
-	public void SetUpSlider()
+	private void Awake()
     {
 		_gameValueService = Services.Instance.GetService<GameValueService>();
 
