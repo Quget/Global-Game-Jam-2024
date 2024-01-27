@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Combine : MonoBehaviour
 {
-    public GameObject[] combinedItems;
-    public string tag1 = "Feather";
-    public string tag2 = "Plant";
-
+    private GameValueService gameValueService;
     private bool instantiationDone = false;
     private List<Collider2D> collidersInside = new List<Collider2D>();
     private List<Collider2D> collidersToRemove = new List<Collider2D>();
 
+    private void Awake()
+    {
+        gameValueService = Services.Instance.GetService<GameValueService>();
+    }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag(tag1) || col.CompareTag(tag2))
+        if (col.gameObject.layer == LayerMask.NameToLayer("Itemlayer"))
         {
             collidersInside.Add(col);
 
@@ -27,7 +29,7 @@ public class Combine : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.CompareTag(tag1) || col.CompareTag(tag2))
+        if (col.gameObject.layer == LayerMask.NameToLayer("Itemlayer"))
         {
             collidersToRemove.Add(col);
         }
@@ -37,15 +39,30 @@ public class Combine : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        if (collidersInside.Exists(c => c.CompareTag(tag1)) && collidersInside.Exists(c => c.CompareTag(tag2)))
+        foreach (var assignment in gameValueService.GameValues.Assignments)
         {
-            instantiationDone = true;
-            foreach (Collider2D collider in collidersInside)
+            if(collidersInside
+                .Where(c=> assignment.ItemTags.Contains(c.gameObject.tag))
+                .Distinct()
+                .Count() == 2)
             {
-                Destroy(collider.gameObject);
-            }
+                instantiationDone = true;
+                foreach (Collider2D collider in collidersInside)
+                {
+                    Destroy(collider.gameObject);
+                }
 
-            Instantiate(combinedItems[0], transform.position, Quaternion.identity);
+                foreach (var combinedItem in gameValueService.GameValues.CombinedItems)
+                {
+                    if(assignment.ResultItemTag == combinedItem.tag)
+                    {
+                        Instantiate(combinedItem, transform.position, Quaternion.identity);
+                        break;
+                    }
+                }
+
+                break;
+            }
         }
 
         foreach (Collider2D colliderToRemove in collidersToRemove)
