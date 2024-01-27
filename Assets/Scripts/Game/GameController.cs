@@ -23,6 +23,14 @@ public class GameController : MonoBehaviour
 		{
 			laughter = value;
 			laughterBar.SetLaughter(value);
+			if (laughter <= 0)
+			{
+				GameOver();
+			}
+			else if ((laughter >= _gameValueService.GameValues.MaxLaughter))
+			{
+				Victory();
+			}
 		}
 	}
 
@@ -57,6 +65,16 @@ public class GameController : MonoBehaviour
 			SceneManager.LoadScene(0);
 		}
 		SecondTick();
+	}
+
+	private void GameOver()
+	{
+
+	}
+
+	private void Victory()
+	{
+
 	}
 
 	private void SecondTick()
