@@ -9,25 +9,34 @@ public class GrijpArmController : MonoBehaviour
     [SerializeField]
     private Transform PickupPoint;
     [SerializeField]
-    public float speed = 5f;
+    public float speed = 0.05f;
     
     private Vector2 StartPosition;
-
+    private enum move { down, up, none };
+    private move GrijpBeweging;
+    private Vector2 NewPosition;
+    public bool grabbing;
+    private GameObject Object;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         StartPosition = GrijpArm.position;
+        GrijpBeweging = move.none;
+        NewPosition = StartPosition;
+        grabbing = false;
     }
 
-    void MoveDown()
+    public void MoveDown()
     {
-       GrijpArm.MovePosition(PickupPoint.position);
+        GrijpBeweging = move.down;
     }
 
-    void MoveUp()
+    public void MoveUp()
     {
-        GrijpArm.MovePosition(StartPosition);
+        GrijpBeweging = move.up;
+
     }
 
     // Update is called once per frame
@@ -35,6 +44,39 @@ public class GrijpArmController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) MoveDown();
         if (Input.GetKeyDown(KeyCode.Alpha2)) MoveUp();
+        if (grabbing) Object.transform.position = GrijpArm.position;
         
-    } 
+    }
+    private void FixedUpdate()
+    {
+        if (GrijpBeweging == move.down)
+        {
+            NewPosition += new Vector2(0, -0.1f);
+            GrijpArm.MovePosition(NewPosition);
+        }
+        
+        if (GrijpBeweging == move.up)
+        {
+            NewPosition += new Vector2(0, +0.1f);
+            GrijpArm.MovePosition(NewPosition);
+        }
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GrijpBeweging = move.none;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("object"))
+        {
+            //grab object
+            grabbing = true;
+            Object = collision.gameObject;
+
+        }
+    }
+   
 }

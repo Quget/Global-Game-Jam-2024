@@ -7,6 +7,8 @@ TagManager:
   - Feather
   - Plant
   - Laughing Plant
+  - object
+  - stop
   layers:
   - Default
   - TransparentFX
