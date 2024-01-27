@@ -7,12 +7,19 @@ public class LaughterBar : MonoBehaviour
 {
     [SerializeField]
     private Slider slider;
+	private GameValueService _gameValueService;
 
-    public void SetUpSlider(GameValues gameValues)
+	private void Awake()
+	{
+		
+	}
+
+	public void SetUpSlider()
     {
+		_gameValueService = Services.Instance.GetService<GameValueService>();
 
-        slider.minValue = 0;
-        slider.maxValue = gameValues.MaxLaughter;
+		slider.minValue = 0;
+        slider.maxValue = _gameValueService.GameValues.MaxLaughter;
     }
 
 	/// <summary>
