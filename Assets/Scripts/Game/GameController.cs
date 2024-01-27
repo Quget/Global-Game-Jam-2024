@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
 	}
 
 	private float tickTimer = 0;
+	private float newAssignmentTimer = 0;
 
 	private void Awake()
     {
@@ -46,8 +47,7 @@ public class GameController : MonoBehaviour
 	private void Start()
 	{
 		Laughter = _gameValueService.GameValues.LaughterStart;
-		var currentAssignment = _assignmentService.GetRandomAssignment();
-		_assignmentService.SetAssignment(currentAssignment);
+		_assignmentService.NewRandomAssignment();
 	}
 
 	private void Update()
@@ -56,7 +56,6 @@ public class GameController : MonoBehaviour
 		{
 			SceneManager.LoadScene(0);
 		}
-
 		SecondTick();
 	}
 
@@ -66,7 +65,20 @@ public class GameController : MonoBehaviour
 		if (tickTimer >= 1)
 		{
 			Laughter -= _gameValueService.GameValues.LaughterDecreaseRatePerSecond;
+
+			NewAssignmentUpdateTick();
+
 			tickTimer = 0;
+		}
+	}
+
+	private void NewAssignmentUpdateTick()
+	{
+		newAssignmentTimer -= 1;
+		if (newAssignmentTimer <= 0)
+		{
+			newAssignmentTimer = Random.Range(_gameValueService.GameValues.NewAssignmentAfterSecondsMin, _gameValueService.GameValues.NewAssignmentAfterSecondsMax);
+			_assignmentService.NewRandomAssignment();
 		}
 	}
 
