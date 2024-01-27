@@ -7,6 +7,8 @@ public class charactercontroller : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rigidBody;
     [SerializeField]
+    private Animator DirectionsMovement;
+    [SerializeField]
     public float speed = 5f;
 
     public enum PlayerType { left,right};
@@ -27,7 +29,9 @@ public class charactercontroller : MonoBehaviour
 
     private void Update()
     {
-       
+        DirectionsMovement.SetFloat("DirectionX", LookDirectionX);
+        DirectionsMovement.SetFloat("DirectionY", LookDirectionY);
+        DirectionsMovement.SetFloat("Movement",1);
     }
 
     // Update is called once per frame
