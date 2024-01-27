@@ -19,3 +19,8 @@ MonoBehaviour:
     - test
     - test2
     ResultItemTag: tester
+  Items:
+  - {fileID: 3318003039857825777, guid: e3847fb6738cda54fbfff7bcb1e9c597, type: 3}
+  - {fileID: 4503235215764235898, guid: 9fb7c341abda1064786d8f52ea09455f, type: 3}
+  CombinedItems:
+  - {fileID: 7770145849289313387, guid: 98c549df8bbd3664fbdd9ed277a657fc, type: 3}
