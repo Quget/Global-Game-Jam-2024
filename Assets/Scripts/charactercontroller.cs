@@ -5,7 +5,8 @@ using UnityEngine;
 public class charactercontroller : MonoBehaviour
 {
     [SerializeField]
-    private CharacterController characterController;
+    private Rigidbody2D rigidBody;
+    //private CharacterController characterController;
     [SerializeField]
     public float speed = 5f;
 
@@ -43,7 +44,8 @@ public class charactercontroller : MonoBehaviour
         }
 
         //Vector2 move = new Vector2(Input.GetAxis("Horizontal"),  Input.GetAxis("Vertical"));
-        characterController.Move(direction * Time.deltaTime * speed);
+        rigidBody.MovePosition(rigidBody.position + direction * Time.deltaTime * speed);
+        //characterController.Move(direction * Time.deltaTime * speed);
         direction.x = 0;
         direction.y = 0;
     }
