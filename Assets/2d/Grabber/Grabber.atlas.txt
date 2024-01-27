@@ -1,0 +1,13 @@
+Grabber.png
+size:1936,603
+filter:Linear,Linear
+pma:true
+Arm
+bounds:2,311,290,1932
+rotate:90
+LeftClaw
+bounds:2,2,307,537
+rotate:90
+RightClaw
+bounds:541,14,295,537
+rotate:90

@@ -13,6 +13,7 @@ public class Services
 			if (instance == null)
 			{
 				instance = new Services();
+				instance.CreateServices();
 			}
 			return instance; 
 		}
@@ -20,15 +21,27 @@ public class Services
 
 	public IList<IServiceAble> ServiceAbles { get; private set; } = new List<IServiceAble>();
 
-	public void AddService(IServiceAble service)
+	private void CreateServices()
 	{
+		Instance.AddService(new GameValueService());
+		Instance.AddService(new AssignmentService());
+	}
+
+	private void AddService(IServiceAble service)
+	{
+		foreach (var item in ServiceAbles)
+		{
+			if (item.GetType() == service.GetType())
+				return;
+		}
 		ServiceAbles.Add(service);
+
 	}
 
 	public T GetService<T>()
 	{
 		var typeOfT = typeof(T);
-		var result = ServiceAbles.Where(s => s.GetType() == typeof(T)).First();
+		var result = ServiceAbles.Where(s => s.GetType() == typeof(T)).FirstOrDefault();
 		return (T)result;
 	}
 }
