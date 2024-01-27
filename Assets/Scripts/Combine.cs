@@ -8,6 +8,9 @@ public class Combine : MonoBehaviour
     [SerializeField]
     private Transform itemOutPosition;
 
+    [SerializeField]
+    private Animator craftingStationAnimator;
+
     private GameValueService gameValueService;
     private bool instantiationDone = false;
     private List<Collider2D> collidersInside = new List<Collider2D>();
@@ -40,7 +43,14 @@ public class Combine : MonoBehaviour
 
     IEnumerator InstantiateWithDelay()
     {
-        yield return new WaitForSeconds(1f);
+        craftingStationAnimator?.SetTrigger("Craft");
+
+		foreach (Collider2D collider in collidersInside)
+		{
+            collider.gameObject.SetActive(false);
+		}
+
+		yield return new WaitForSeconds(1f);
 
         foreach (var assignment in gameValueService.GameValues.Assignments)
         {
@@ -59,7 +69,9 @@ public class Combine : MonoBehaviour
                 {
                     if(assignment.ResultItemTag == combinedItem.tag)
                     {
-                        Instantiate(combinedItem, itemOutPosition.position, Quaternion.identity);
+                        Instantiate(combinedItem, 
+                            itemOutPosition != null?itemOutPosition.position:transform.position,
+                            Quaternion.identity);
                         break;
                     }
                 }
@@ -67,8 +79,8 @@ public class Combine : MonoBehaviour
                 break;
             }
         }
-
-        foreach (Collider2D colliderToRemove in collidersToRemove)
+		craftingStationAnimator?.SetTrigger("StopCraft");
+		foreach (Collider2D colliderToRemove in collidersToRemove)
         {
             collidersInside.Remove(colliderToRemove);
         }

@@ -3047,6 +3047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemOutPosition: {fileID: 862682160}
+  craftingStationAnimator: {fileID: 1935458635}
 --- !u!4 &1824288251
 Transform:
   m_ObjectHideFlags: 0
@@ -3242,6 +3243,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 639d4244263b563449a6a9530728f6d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1935458635 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4932344869112671385, guid: 6d478b823535056448cfca25dc46d838, type: 3}
+  m_PrefabInstance: {fileID: 864710325}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1957652593
 GameObject:
   m_ObjectHideFlags: 0
