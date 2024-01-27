@@ -12,6 +12,8 @@ public class GrijpArmController : MonoBehaviour
     private Transform PickupPoint;
     [SerializeField]
     public float speed = 0.05f;
+    [SerializeField]
+    private ItemController itemcontroller;
     public Vector3 OffSet = new Vector3(0,-0.77f,0);
     
     private Vector2 StartPosition;
@@ -21,6 +23,7 @@ public class GrijpArmController : MonoBehaviour
     public bool grabbing;
     private GameObject Object;
     private Rigidbody2D ItemRigidBody;
+    private bool grabbed;
     
     
 
@@ -31,6 +34,7 @@ public class GrijpArmController : MonoBehaviour
         GrijpBeweging = move.none;
         NewPosition = StartPosition;
         grabbing = false;
+        grabbed = false;
     }
 
     public void MoveDown()
@@ -52,13 +56,13 @@ public class GrijpArmController : MonoBehaviour
         if (grabbing) Object.transform.position = GrijpArm.transform.position + OffSet;
         if((GrijpArm.position == StartPosition) && grabbing)
         {
-            Debug.Log("wegsmijten");
-            ItemRigidBody = Object.GetComponent<Rigidbody2D>();
-            ItemRigidBody.gravityScale = 1;
-            
+            //Debug.Log("wegsmijten");
+            grabbing = false;
+            itemcontroller.Release(Right_Player);
+            grabbed = false;
+
         }
-        Vector2 v = new Vector2(6f, -3f);
-        ItemRigidBody.AddForce(v, ForceMode2D.Impulse);
+        
     }
     private void FixedUpdate()
     {
@@ -85,12 +89,19 @@ public class GrijpArmController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Itemlayer"))
         {
-            //grab object
-            grabbing = true;
-            Object = collision.gameObject;
-            Object.transform.position = Object.transform.position + OffSet;
+            if (!grabbed)
+            {
+                //grab object
+                grabbed = true;
+                grabbing = true;
+                Object = collision.gameObject;
+                Object.transform.position = Object.transform.position + OffSet;
+                MoveUp(); 
+            }
 
         }
+
+        
     }
    
 }

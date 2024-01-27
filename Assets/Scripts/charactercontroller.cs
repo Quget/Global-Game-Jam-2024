@@ -17,7 +17,7 @@ public class charactercontroller : MonoBehaviour
     public float LookDirectionX;
     public float LookDirectionY;
 
-    private Vector2 direction;
+    public Vector2 direction;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class charactercontroller : MonoBehaviour
     {
         DirectionsMovement.SetFloat("DirectionX", LookDirectionX);
         DirectionsMovement.SetFloat("DirectionY", LookDirectionY);
-        DirectionsMovement.SetFloat("Movement",1);
+        
     }
 
     // Update is called once per frame
@@ -48,6 +48,7 @@ public class charactercontroller : MonoBehaviour
                 {
                     HoldItem = true;
                     //Debug.Log("holditem left");
+                    
                 }
                 else HoldItem = false;
                
@@ -72,6 +73,10 @@ public class charactercontroller : MonoBehaviour
         rigidBody.MovePosition(rigidBody.position + direction * Time.deltaTime * speed);
         if(direction.x != 0) LookDirectionX = direction.x;
         if (direction.y != 0) LookDirectionY = direction.y;
+        //loop animatie starten
+        if (direction.x != 0 || direction.y != 0) DirectionsMovement.SetFloat("Movement", 1);
+        //loopanimatie stoppen
+        else DirectionsMovement.SetFloat("Movement", 0);
         direction.x = 0;
         direction.y = 0;
     }
