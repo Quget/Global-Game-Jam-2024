@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7454560115346886704}
   - component: {fileID: 2422939401608954518}
   - component: {fileID: 3438631944558895834}
-  - component: {fileID: 5331837026843841098}
+  - component: {fileID: -1729655701991004945}
   m_Layer: 6
   m_Name: Feather
   m_TagString: Feather
@@ -113,8 +113,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &5331837026843841098
-CapsuleCollider2D:
+--- !u!58 &-1729655701991004945
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -145,6 +145,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.105993986, y: 0.048580527}
-  m_Size: {x: 0.53018904, y: 1.1147003}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
