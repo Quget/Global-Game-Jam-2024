@@ -11,6 +11,7 @@ public class charactercontroller : MonoBehaviour
 
     public enum PlayerType { left,right};
     public PlayerType playerType;
+    public bool HoldItem;
 
     private Vector2 direction;
 
@@ -18,6 +19,7 @@ public class charactercontroller : MonoBehaviour
     void Start()
     {
         direction = new Vector2();
+        HoldItem = false;
     }
 
     // Update is called once per frame
@@ -30,12 +32,25 @@ public class charactercontroller : MonoBehaviour
                 if (Input.GetKey(KeyCode.S)) direction.y = -1;
                 if (Input.GetKey(KeyCode.A)) direction.x = -1;
                 if (Input.GetKey(KeyCode.D)) direction.x = 1;
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    HoldItem = true;
+                    Debug.Log("holditem left");
+                }
+                else HoldItem = false;
+               
                 break;
             case PlayerType.right:
                 if (Input.GetKey(KeyCode.UpArrow)) direction.y = 1;
                 if (Input.GetKey(KeyCode.DownArrow)) direction.y = -1;
                 if (Input.GetKey(KeyCode.LeftArrow)) direction.x = -1;
                 if (Input.GetKey(KeyCode.RightArrow)) direction.x = 1;
+                if (Input.GetKey(KeyCode.RightShift))
+                {
+                    HoldItem = true;
+                    Debug.Log("holditem right");
+                }
+                else HoldItem = false;
                 break;
                     default:
                 //
