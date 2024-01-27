@@ -21,7 +21,7 @@ public class charactercontroller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         switch (playerType)
         {
@@ -42,9 +42,7 @@ public class charactercontroller : MonoBehaviour
                 break;
         }
 
-        //Vector2 move = new Vector2(Input.GetAxis("Horizontal"),  Input.GetAxis("Vertical"));
         rigidBody.MovePosition(rigidBody.position + direction * Time.deltaTime * speed);
-        //characterController.Move(direction * Time.deltaTime * speed);
         direction.x = 0;
         direction.y = 0;
     }
