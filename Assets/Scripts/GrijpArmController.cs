@@ -70,7 +70,7 @@ public class GrijpArmController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "object")
+        if (collision.gameObject.CompareTag("object"))
         {
             //grab object
             grabbing = true;
