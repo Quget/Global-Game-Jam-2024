@@ -9,25 +9,30 @@ public class GrijpArmController : MonoBehaviour
     [SerializeField]
     private Transform PickupPoint;
     [SerializeField]
-    public float speed = 5f;
+    public float speed = 0.05f;
     
     private Vector2 StartPosition;
-
+    private enum move { down, up, none };
+    private move GrijpBeweging;
+    private Vector2 NewPosition;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         StartPosition = GrijpArm.position;
+        GrijpBeweging = move.none;
+        NewPosition = StartPosition;
     }
 
-    void MoveDown()
+    public void MoveDown()
     {
-       GrijpArm.MovePosition(PickupPoint.position);
+        GrijpBeweging = move.down;
     }
 
-    void MoveUp()
+    public void MoveUp()
     {
-        GrijpArm.MovePosition(StartPosition);
+        GrijpBeweging = move.up;
     }
 
     // Update is called once per frame
@@ -36,5 +41,25 @@ public class GrijpArmController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) MoveDown();
         if (Input.GetKeyDown(KeyCode.Alpha2)) MoveUp();
         
-    } 
+    }
+    private void FixedUpdate()
+    {
+        if (GrijpBeweging == move.down)
+        {
+            NewPosition += new Vector2(0, -0.1f);
+            GrijpArm.MovePosition(NewPosition);
+        }
+        
+        if (GrijpBeweging == move.up)
+        {
+            NewPosition += new Vector2(0, +0.1f);
+            GrijpArm.MovePosition(NewPosition);
+        }
+        
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+          GrijpBeweging = move.none;
+    }
 }

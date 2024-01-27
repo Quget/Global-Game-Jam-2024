@@ -35,7 +35,7 @@ public class charactercontroller : MonoBehaviour
                 if (Input.GetKey(KeyCode.Space))
                 {
                     HoldItem = true;
-                    Debug.Log("holditem left");
+                    //Debug.Log("holditem left");
                 }
                 else HoldItem = false;
                
@@ -48,7 +48,7 @@ public class charactercontroller : MonoBehaviour
                 if (Input.GetKey(KeyCode.RightShift))
                 {
                     HoldItem = true;
-                    Debug.Log("holditem right");
+                    //Debug.Log("holditem right");
                 }
                 else HoldItem = false;
                 break;
