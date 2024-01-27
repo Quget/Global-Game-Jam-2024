@@ -569,7 +569,6 @@ MonoBehaviour:
       - Man
       - Razor
       ResultItemTag: Mustouche
-  rigidbody2: {fileID: 0}
 --- !u!1001 &3416532741858892829
 PrefabInstance:
   m_ObjectHideFlags: 0
