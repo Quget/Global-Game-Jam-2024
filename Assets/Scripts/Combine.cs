@@ -12,11 +12,11 @@ public class Combine : MonoBehaviour
     private List<Collider2D> collidersInside = new List<Collider2D>();
     private List<Collider2D> collidersToRemove = new List<Collider2D>();
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (other.CompareTag(tag1) || other.CompareTag(tag2))
+        if (col.CompareTag(tag1) || col.CompareTag(tag2))
         {
-            collidersInside.Add(other);
+            collidersInside.Add(col);
 
             if (collidersInside.Count == 2 && !instantiationDone)
             {
@@ -25,11 +25,11 @@ public class Combine : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D col)
     {
-        if (other.CompareTag(tag1) || other.CompareTag(tag2))
+        if (col.CompareTag(tag1) || col.CompareTag(tag2))
         {
-            collidersToRemove.Add(other);
+            collidersToRemove.Add(col);
         }
     }
 

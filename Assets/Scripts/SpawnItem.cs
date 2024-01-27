@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SpawnItem : MonoBehaviour
 {
-    public GameObject[] items;
+    private GameValueService gameValueService;
     public float conveyorSpeed = 2f;
-
+    GameObject[] items;
     void Start()
     {
+        gameValueService = Services.Instance.GetService<GameValueService>();
+        items = gameValueService.GameValues.Items;
         if (items.Length > 0)
         {
             InvokeRepeating("SpawnRandomObject", 0f, 2f);
@@ -31,9 +33,9 @@ public class SpawnItem : MonoBehaviour
         Debug.Log("Spawned: " + spawnedObject.name);
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D col)
     {
-        Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = col.GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(0f, 0f);
     }
 }
