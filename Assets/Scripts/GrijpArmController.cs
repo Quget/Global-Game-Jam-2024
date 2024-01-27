@@ -13,20 +13,17 @@ public class GrijpArmController : MonoBehaviour
     [SerializeField]
     public float speed = 0.05f;
     [SerializeField]
-    private ItemController itemcontroller;
-    [SerializeField]
-    public Vector2 EndPosition = new Vector2(0f, 0f);
+    private Transform itemHolder;private GameObject item;
     public Vector3 OffSet = new Vector3(0,-0.77f,0);
     
     private Vector2 StartPosition;
     private enum move { down, up, none };
     private move GrijpBeweging;
     private Vector2 NewPosition;
-    public bool grabbing;
+    private bool grabbing;
     private GameObject Object;
     private Rigidbody2D ItemRigidBody;
-    public bool grabbed;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +31,7 @@ public class GrijpArmController : MonoBehaviour
         GrijpBeweging = move.none;
         NewPosition = StartPosition;
         grabbing = false;
-        grabbed = false;
+        
     }
 
     public void MoveDown()
@@ -59,16 +56,18 @@ public class GrijpArmController : MonoBehaviour
         
         if((GrijpArm.position == StartPosition) && grabbing)
         {
-            //Debug.Log("wegsmijten");
+            Debug.Log("wegsmijten");
+            if (item != null)
+            {
+                
+                item.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                item.transform.parent = null;
+                item = null;
+            }
             grabbing = false;
-            itemcontroller.Release(Right_Player);
+
         }
-        else
-        {
-            if (grabbing) 
-                Object.transform.position = GrijpArm.transform.position + OffSet;
-        }
-        
+       
     }
     private void FixedUpdate()
     {
@@ -88,27 +87,23 @@ public class GrijpArmController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //weggooi code aanroepen
+
         GrijpBeweging = move.none;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Itemlayer"))
-        {
-                //grab object
-                grabbed = true;
-                grabbing = true;
-                Object = collision.gameObject;
-                Object.transform.position = Object.transform.position + OffSet;
-                MoveUp(); 
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Itemlayer"))
-        {
-            grabbed = false;
-        }
-    }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Itemlayer")
+            && item == null)
+        {
+            //Debug.Log("beetpakken door grabber");
+            item = collision.gameObject;
+            item.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            item.transform.parent = itemHolder;
+            item.transform.localPosition = Vector2.zero;
+            MoveUp();
+        }
+    }
 }

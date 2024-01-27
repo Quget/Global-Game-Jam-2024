@@ -60,14 +60,9 @@ public class charactercontroller : MonoBehaviour
                     //Debug.Log("holditem left");
 
                 }
-                else if(item != null)
+                else 
                 {
-                    
-                    item.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                    DirectionsMovement.SetTrigger("Throw");
-                    HoldItem = false;
-                    item.transform.parent = null;
-                    item = null;
+                    ReleaseItem();
                 }
 
                 break;
@@ -81,17 +76,9 @@ public class charactercontroller : MonoBehaviour
                     HoldItem = true;
                     //Debug.Log("holditem right");
                 }
-                else 
+                else
                 {
-                    if (item != null)
-                    {
-                        item.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                        DirectionsMovement.SetTrigger("Throw");
-                        
-                        item.transform.parent = null;
-                        item = null;
-                    }
-                    HoldItem = false;
+                    ReleaseItem();
                 }
                 break;
             default:
@@ -108,6 +95,19 @@ public class charactercontroller : MonoBehaviour
         else DirectionsMovement.SetFloat("Movement", 0);
         direction.x = 0;
         direction.y = 0;
+
+        void ReleaseItem()
+        {
+            if (item != null)
+            {
+                item.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                DirectionsMovement.SetTrigger("Throw");
+
+                item.transform.parent = null;
+                item = null;
+            }
+            HoldItem = false;
+        }
     }
 
 private void OnCollisionStay2D(Collision2D collision)
@@ -117,8 +117,7 @@ private void OnCollisionStay2D(Collision2D collision)
             && item == null)
         {
 
-            Debug.Log("beetpakken");
-            
+            //Debug.Log("beetpakken");
             item = collision.gameObject;
             item.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             item.transform.parent = itemHolder;
