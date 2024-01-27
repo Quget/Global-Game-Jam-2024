@@ -7,13 +7,14 @@ public class SpawnItem : MonoBehaviour
     private GameValueService gameValueService;
     public float conveyorSpeed = 2f;
     GameObject[] items;
+
     void Start()
     {
         gameValueService = Services.Instance.GetService<GameValueService>();
         items = gameValueService.GameValues.Items;
         if (items.Length > 0)
         {
-            InvokeRepeating("SpawnRandomObject", 0f, 2f);
+            InvokeRepeating("SpawnRandomObject", 0f, 5f);
         }
     }
 
@@ -30,14 +31,32 @@ public class SpawnItem : MonoBehaviour
 
         rb.velocity = new Vector2(-conveyorSpeed, 0f);
 
+        spawnedObject.AddComponent<ConveyorItemController>();
+
         Debug.Log("Spawned: " + spawnedObject.name);
     }
 
-    void OnTriggerExit2D(Collider2D col)
+    public void StartSpawning()
     {
-        Rigidbody2D rb = col.GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(0f, 0f);
+        InvokeRepeating("SpawnRandomObject", 5f, 5f);
+    }
+
+    public void StopSpawning()
+    {
+        CancelInvoke();
     }
 }
-
-
+    public class ConveyorItemController : MonoBehaviour
+    {
+        private void Update()
+        {
+            if (transform.position.x <= 9)
+            {
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.velocity = Vector2.zero;
+                }
+            }
+        }
+    }
