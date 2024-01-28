@@ -105,10 +105,12 @@ public class GameController : MonoBehaviour
 		Destroy(FindObjectOfType<SpawnItem>()?.gameObject);
 		Destroy(FindObjectOfType<charactercontroller>());
 
-		var bodies = FindObjectsOfType<Rigidbody2D>();
-        foreach (var  body in bodies)
+		var items = FindObjectsOfType<ItemObject>();
+		
+		foreach (var  item in items)
         {
-			body.AddForce(new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * 1000);
+			var force = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * 1000;
+			item.Rigidbody.AddForceAtPosition(force, Vector2.zero);
         }
     }
 	private void SecondTick()
