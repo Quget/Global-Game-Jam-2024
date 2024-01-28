@@ -36,7 +36,9 @@ public class SpawnItem : MonoBehaviour
 
         if (spawnCount == gameValueService.GameValues.correctAfterXSpawned)
         {
-            var newItem = items.Where(e => e.tag == assignmentService.CurrentAssignment.ItemTags[Random.Range(0, assignmentService.CurrentAssignment.ItemTags.Length)]).FirstOrDefault();
+            string tag = assignmentService.CurrentAssignment.ItemTags[Random.Range(0, assignmentService.CurrentAssignment.ItemTags.Length)];
+
+			var newItem = items.Where(e => e.tag == tag).FirstOrDefault();
 
             if(newItem != null)
             {

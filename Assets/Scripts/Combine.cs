@@ -89,6 +89,11 @@ public class Combine : MonoBehaviour
         bool correct = false;
         foreach (var assignment in gameValueService.GameValues.Assignments)
         {
+            if (collidersInside.Distinct().Count() < 2)
+            {
+                break;
+            }
+
             if(collidersInside
                 .Where(c=> assignment.ItemTags.Contains(c.gameObject.tag))
                 .Distinct()

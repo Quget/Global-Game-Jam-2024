@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: GameValues
   m_EditorClassIdentifier: 
   MaxLaughter: 100
-  LaughterDecreaseRatePerSecond: 0.5
+  LaughterDecreaseRatePerSecond: 0.25
   LaughterStart: 50
-  NewAssignmentAfterSecondsMin: 30
-  NewAssignmentAfterSecondsMax: 45
+  NewAssignmentAfterSecondsMin: 50
+  NewAssignmentAfterSecondsMax: 60
   correctAfterXSpawned: 2
   ItemObjects:
   - {fileID: 8368888104055569934, guid: 1e3356bdcd92f524e80e8827a4642d46, type: 3}
