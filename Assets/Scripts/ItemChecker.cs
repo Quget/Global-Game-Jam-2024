@@ -18,7 +18,10 @@ public class ItemChecker : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (_assignmentService.CurrentAssignment.ResultItemTag != null && col.gameObject.layer == LayerMask.NameToLayer("Itemlayer"))
+
+        if (_assignmentService.CurrentAssignment.ResultItemTag != null 
+			&& col.gameObject.layer == LayerMask.NameToLayer("Itemlayer")
+			 && col.gameObject.transform.parent == null)
         {
 			if (col.tag == _assignmentService.CurrentAssignment.ResultItemTag)
 			{

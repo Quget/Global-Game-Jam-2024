@@ -34,8 +34,17 @@ public class GrijpArmController : MonoBehaviour
 
     [SerializeField]
     private float force = 750;
-    
-    private Vector2 StartPosition;
+
+    [SerializeField]
+    private AudioClip downSound;
+
+    [SerializeField]
+    private AudioClip upSound;
+
+	[SerializeField]
+	private AudioClip throwSound;
+
+	private Vector2 StartPosition;
     private enum move { down, up, none };
     private move GrijpBeweging;
     private Vector2 NewPosition;
@@ -49,38 +58,41 @@ public class GrijpArmController : MonoBehaviour
         
     }
 
+
+    private void PlaySound(AudioClip sound)
+    { 
+        if(sound != null)
+		    AudioSource.PlayClipAtPoint(sound, Camera.main.transform.position, 1);
+	}
+
     public void MoveDown()
     {
         GrijpBeweging = move.down;
         TargetZone.enabled = false;
-    }
+        PlaySound(downSound);
+
+
+	}
 
     public void MoveUp()
     {
         GrijpBeweging = move.up;
-
-    }
+		PlaySound(upSound);
+	}
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Alpha1)) 
-            MoveDown();
-
-        if (Input.GetKeyDown(KeyCode.Alpha2)) 
-            MoveUp();
-        
         //if((GrijpArm.position == StartPosition) && grabbing)
         
         if(GrijpArm.gameObject.transform.localPosition.y >= startY && GrijpBeweging == move.up)
 		{
             animator.SetTrigger("Open");
 
-			Debug.Log("wegsmijten");
             if (item != null)
             {
-                // && grabbing
+                PlaySound(throwSound);
+				// && grabbing
 				item.Rigidbody.bodyType = RigidbodyType2D.Dynamic;
 				StartCoroutine(DelayEnableCollision(item.Collider));
 

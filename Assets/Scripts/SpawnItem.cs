@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpawnItem : MonoBehaviour
@@ -10,7 +11,10 @@ public class SpawnItem : MonoBehaviour
 
     private ItemObject[] items;
 
-    void Start()
+	[SerializeField]
+	private AudioClip spawnSound = null;
+
+	void Start()
     {
         gameValueService = Services.Instance.GetService<GameValueService>();
         items = gameValueService.GameValues.ItemObjects.Where(i => !i.IsCombinedItem).ToArray();
@@ -25,12 +29,15 @@ public class SpawnItem : MonoBehaviour
         int randomIndex = Random.Range(0, items.Length);
         ItemObject spawnedObject = Instantiate(items[randomIndex], transform.position, Quaternion.identity);
         spawnedObject.Throw(-transform.up * 200);
+        if(spawnSound != null)
+        {
+			AudioSource.PlayClipAtPoint(spawnSound, Camera.main.transform.position, 1);
+		}
+		
+		//rb.velocity = new Vector2(-conveyorSpeed, 0f);
+		//spawnedObject.AddComponent<ConveyorItemController>();
 
-        //rb.velocity = new Vector2(-conveyorSpeed, 0f);
-        //spawnedObject.AddComponent<ConveyorItemController>();
-
-        Debug.Log("Spawned: " + spawnedObject.name);
-    }
+	}
 
     public void StartSpawning()
     {

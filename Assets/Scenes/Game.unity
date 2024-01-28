@@ -1116,7 +1116,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press the any key to return
+  m_text: Press enter key to return
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ad5569965d2734880a004e3e3d7d1358, type: 2}
   m_sharedMaterial: {fileID: 3074828514974314926, guid: ad5569965d2734880a004e3e3d7d1358, type: 2}
@@ -1966,6 +1966,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7296607120907835315, guid: 9b3e928f3ce305140b9efe80c8f7c915, type: 3}
+      propertyPath: upSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 55b9a8f1817105d47af6e80a21800206, type: 3}
+    - target: {fileID: 7296607120907835315, guid: 9b3e928f3ce305140b9efe80c8f7c915, type: 3}
+      propertyPath: downSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 55b9a8f1817105d47af6e80a21800206, type: 3}
+    - target: {fileID: 7296607120907835315, guid: 9b3e928f3ce305140b9efe80c8f7c915, type: 3}
+      propertyPath: throwSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7840a06eb12bf7a4087bbcdd1e03fbcd, type: 3}
+    - target: {fileID: 7296607120907835315, guid: 9b3e928f3ce305140b9efe80c8f7c915, type: 3}
       propertyPath: PickupPoint
       value: 
       objectReference: {fileID: 1737945708}
@@ -2508,6 +2520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conveyorSpeed: -2
+  spawnSound: {fileID: 8300000, guid: ad393124e1a951144bad9a19f6157337, type: 3}
 --- !u!61 &1089556679
 BoxCollider2D:
   m_ObjectHideFlags: 0
