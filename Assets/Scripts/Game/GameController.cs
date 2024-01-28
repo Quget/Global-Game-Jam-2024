@@ -37,6 +37,18 @@ public class GameController : MonoBehaviour
 	private float tickTimer = 0;
 	private float newAssignmentTimer = 0;
 
+	[SerializeField]
+	private GameObject gameOverObject;
+
+	[SerializeField]
+	private GameObject victoryObject;
+
+	[SerializeField]
+	private AudioClip victorySound;
+
+	[SerializeField]
+	private AudioClip gameOverSound;
+
 	private void Awake()
     {
 		if (Instance != null && GameController.Instance != this)
@@ -60,23 +72,45 @@ public class GameController : MonoBehaviour
 
 	private void Update()
 	{
-		if(Input.GetKey(KeyCode.Escape))
+
+		if (gameOverObject.activeInHierarchy || victoryObject.activeInHierarchy)
 		{
-			SceneManager.LoadScene(0);
+			if (Input.anyKeyDown)
+			{
+				SceneManager.LoadScene(0);
+			}
 		}
-		SecondTick();
+		else
+		{
+			SecondTick();
+		}
 	}
 
 	private void GameOver()
 	{
-
+		gameOverObject.gameObject.SetActive(true);
+		AudioSource.PlayClipAtPoint(gameOverSound, Camera.main.transform.position, 1);
+		Clear();
 	}
 
 	private void Victory()
 	{
-
+		victoryObject.gameObject.SetActive(true);
+		AudioSource.PlayClipAtPoint(victorySound, Camera.main.transform.position, 1);
+		Clear();
 	}
 
+	private void Clear()
+	{
+		Destroy(FindObjectOfType<SpawnItem>()?.gameObject);
+		Destroy(FindObjectOfType<charactercontroller>());
+
+		var bodies = FindObjectsOfType<Rigidbody2D>();
+        foreach (var  body in bodies)
+        {
+			body.AddForce(new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)) * 1000);
+        }
+    }
 	private void SecondTick()
 	{
 		tickTimer += Time.deltaTime;
