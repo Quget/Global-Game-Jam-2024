@@ -61,13 +61,7 @@ public class AssignmentShower : MonoBehaviour
 	//Very slow
 	private Sprite GetSpriteByTag(string tag)
 	{
-		var itemObject = _gameValueService.GameValues.Items.Where(i => i.tag == tag).FirstOrDefault();
-		if (itemObject != null)
-		{
-			return itemObject.GetComponent<SpriteRenderer>().sprite;
-		}
-
-		itemObject = _gameValueService.GameValues.CombinedItems.Where(i => i.tag == tag).FirstOrDefault();
+		var itemObject = _gameValueService.GameValues.ItemObjects.Where(i => i.tag == tag).FirstOrDefault();
 		if (itemObject != null)
 		{
 			return itemObject.GetComponent<SpriteRenderer>().sprite;

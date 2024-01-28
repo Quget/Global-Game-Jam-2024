@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SpawnItem : MonoBehaviour
 {
     private GameValueService gameValueService;
     public float conveyorSpeed = 2f;
-    GameObject[] items;
+
+    private ItemObject[] items;
 
     void Start()
     {
         gameValueService = Services.Instance.GetService<GameValueService>();
-        items = gameValueService.GameValues.Items;
+        items = gameValueService.GameValues.ItemObjects.Where(i => !i.IsCombinedItem).ToArray();
         if (items.Length > 0)
         {
             InvokeRepeating("SpawnRandomObject", 0f, 5f);
@@ -21,19 +23,10 @@ public class SpawnItem : MonoBehaviour
     void SpawnRandomObject()
     {
         int randomIndex = Random.Range(0, items.Length);
-        GameObject spawnedObject = Instantiate(items[randomIndex], transform.position, Quaternion.identity);
+        ItemObject spawnedObject = Instantiate(items[randomIndex], transform.position, Quaternion.identity);
+        spawnedObject.Throw(-transform.up * 200);
 
-        Rigidbody2D rb = spawnedObject.GetComponent<Rigidbody2D>();
-        if (rb == null)
-        {
-            rb = spawnedObject.AddComponent<Rigidbody2D>();
-        }
-
-       
-        rb.AddForce(-transform.up * 200);
         //rb.velocity = new Vector2(-conveyorSpeed, 0f);
-
-
         //spawnedObject.AddComponent<ConveyorItemController>();
 
         Debug.Log("Spawned: " + spawnedObject.name);

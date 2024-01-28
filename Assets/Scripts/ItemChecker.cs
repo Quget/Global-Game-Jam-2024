@@ -6,7 +6,12 @@ public class ItemChecker : MonoBehaviour
 {
     private AssignmentService _assignmentService;
 
-    void Awake()
+	[SerializeField]
+	private AudioClip correct = null;
+
+	[SerializeField]
+	private AudioClip incorrect = null;
+	void Awake()
     {
 		_assignmentService = Services.Instance.GetService<AssignmentService>();
     }
@@ -18,11 +23,13 @@ public class ItemChecker : MonoBehaviour
 			if (col.tag == _assignmentService.CurrentAssignment.ResultItemTag)
 			{
 				GameController.Instance.Laughter += 10;
+				AudioSource.PlayClipAtPoint(correct, Camera.main.transform.position, 1);
 			}
 
 			if (col.tag != _assignmentService.CurrentAssignment.ResultItemTag)
 			{
 				GameController.Instance.Laughter -= 5;
+				AudioSource.PlayClipAtPoint(incorrect, Camera.main.transform.position, 1);
 			}
 			Destroy(col.gameObject);
 		}

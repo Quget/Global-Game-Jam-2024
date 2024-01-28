@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class StopSpawning : MonoBehaviour
 {
-    private GameValueService gameValueService;
-    GameObject[] items;
     public SpawnItem spawnItem;
     private bool isInSpawn;
 
     void Start()
     {
-        gameValueService = Services.Instance.GetService<GameValueService>();
-        items = gameValueService.GameValues.Items;
         isInSpawn = false;
     }
 
