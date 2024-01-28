@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -11,7 +12,10 @@ public class GameValuesScriptable :ScriptableObject
 	public float LaughterStart;
 	public int NewAssignmentAfterSecondsMin = 30;
 	public int NewAssignmentAfterSecondsMax = 50;
+
+	public ItemObject[] ItemObjects;
+
 	public Assignment[] Assignments;
-	public GameObject[] Items;
-	public GameObject[] CombinedItems;
+	//public GameObject[] Items;
+	//public GameObject[] CombinedItems;
 }

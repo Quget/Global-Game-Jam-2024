@@ -11,12 +11,30 @@ public class Combine : MonoBehaviour
     [SerializeField]
     private Animator craftingStationAnimator;
 
+    [SerializeField]
+    private bool addIsMaking = true;
+
     private GameValueService gameValueService;
     private bool instantiationDone = false;
+
+    private bool isCreating = false;
     private List<Collider2D> collidersInside = new List<Collider2D>();
     private List<Collider2D> collidersToRemove = new List<Collider2D>();
 
-    private void Awake()
+    [SerializeField]
+    private AudioClip machineGenerate = null;
+
+	[SerializeField]
+	private AudioClip machineFailed = null;
+
+	[SerializeField]
+	private AudioClip machineSuccess = null;
+
+	[SerializeField]
+	private AudioClip itemAdd = null;
+
+
+	private void Awake()
     {
         gameValueService = Services.Instance.GetService<GameValueService>();
     }
@@ -26,7 +44,14 @@ public class Combine : MonoBehaviour
         {
             collidersInside.Add(col);
 
-            if (collidersInside.Count == 2 && !instantiationDone)
+            if (addIsMaking)
+            {
+				col.gameObject.SetActive(false);
+				AudioSource.PlayClipAtPoint(itemAdd, Camera.main.transform.position, 1);
+			}
+			    
+
+			if (collidersInside.Count == 2 && !instantiationDone)
             {
                 StartCoroutine(InstantiateWithDelay());
             }
@@ -35,6 +60,11 @@ public class Combine : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D col)
     {
+        if (addIsMaking)
+        {
+            return;
+        }
+
         if (col.gameObject.layer == LayerMask.NameToLayer("Itemlayer"))
         {
             collidersToRemove.Add(col);
@@ -43,15 +73,20 @@ public class Combine : MonoBehaviour
 
     IEnumerator InstantiateWithDelay()
     {
-        craftingStationAnimator?.SetTrigger("Craft");
+        isCreating = true;
+		craftingStationAnimator?.SetTrigger("Craft");
 
-		foreach (Collider2D collider in collidersInside)
-		{
-            collider.gameObject.SetActive(false);
+        if (!addIsMaking)
+        {
+			foreach (Collider2D collider in collidersInside)
+			{
+				collider.gameObject.SetActive(false);
+			}
 		}
 
+        AudioSource.PlayClipAtPoint(machineGenerate, Camera.main.transform.position,1);
 		yield return new WaitForSeconds(1f);
-
+        bool correct = false;
         foreach (var assignment in gameValueService.GameValues.Assignments)
         {
             if(collidersInside
@@ -63,29 +98,49 @@ public class Combine : MonoBehaviour
                 foreach (Collider2D collider in collidersInside)
                 {
                     Destroy(collider.gameObject);
-                }
+				}
 
-                foreach (var combinedItem in gameValueService.GameValues.CombinedItems)
+                foreach (var combinedItem in gameValueService.GameValues.ItemObjects)
                 {
                     if(assignment.ResultItemTag == combinedItem.tag)
                     {
-                        Instantiate(combinedItem, 
+                        var item = Instantiate(combinedItem, 
                             itemOutPosition != null?itemOutPosition.position:transform.position,
                             Quaternion.identity);
-                        break;
+
+                        item.PlayCreateSound();
+
+						correct = true;
+						break;
                     }
                 }
 
                 break;
             }
         }
+
+		AudioSource.PlayClipAtPoint(correct?machineSuccess:machineFailed, Camera.main.transform.position, 1);
+
 		craftingStationAnimator?.SetTrigger("StopCraft");
+
 		foreach (Collider2D colliderToRemove in collidersToRemove)
         {
-            collidersInside.Remove(colliderToRemove);
+            if(colliderToRemove != null)
+				Destroy(colliderToRemove.gameObject);
+
         }
-        collidersToRemove.Clear();
-        instantiationDone = false;
+
+		foreach (Collider2D colliderToRemove in collidersInside)
+		{
+			if (collidersInside != null)
+				Destroy(colliderToRemove.gameObject);
+
+		}
+
+		collidersInside.Clear();
+		collidersToRemove.Clear();
+		isCreating = false;
+		instantiationDone = false;
     }
 }
 

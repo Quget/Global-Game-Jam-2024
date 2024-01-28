@@ -9,6 +9,18 @@ TagManager:
   - Laughing Plant
   - object
   - stop
+  - Battery
+  - BubbleGum
+  - Gun
+  - WaterBottle
+  - FartCan
+  - BubbleGun
+  - FartGun
+  - FlowerGun
+  - ShockBubbleGum
+  - SquirtFlower
+  - WaterGun
+  - WhoopieCushion
   layers:
   - Default
   - TransparentFX
@@ -18,7 +30,7 @@ TagManager:
   - UI
   - Itemlayer
   - Bovenkant
-  - 
+  - Dispenser
   - 
   - 
   - 

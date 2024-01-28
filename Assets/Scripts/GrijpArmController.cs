@@ -16,8 +16,9 @@ public class GrijpArmController : MonoBehaviour
 
     [SerializeField]
     private Transform itemHolder;
-    
-    private GameObject item;
+
+    //private GameObject item;
+    private ItemObject item;
 
     [SerializeField]
     private BoxCollider2D TargetZone;
@@ -80,13 +81,11 @@ public class GrijpArmController : MonoBehaviour
             if (item != null)
             {
                 // && grabbing
-                var itemRigedBody = item.GetComponent<Rigidbody2D>();
-				itemRigedBody.bodyType = RigidbodyType2D.Dynamic;
+				item.Rigidbody.bodyType = RigidbodyType2D.Dynamic;
+				StartCoroutine(DelayEnableCollision(item.Collider));
 
-				//item.GetComponent<Collider2D>().enabled = true;
-				StartCoroutine(DelayEnableCollision(item.GetComponent<Collider2D>()));
                 Vector2 target = Vector2.down +new Vector2(Random.Range(-0.1f, 0.65f), 0);
-                itemRigedBody.AddForce(target * force, ForceMode2D.Force);
+                item.Throw(target * force);
 				item.transform.parent = null;
 				item = null;
 			}
@@ -131,15 +130,17 @@ public class GrijpArmController : MonoBehaviour
 	//private void OnTriggerEnter2D(Collider2D collision)
     private void OnTriggerStay2D(Collider2D collision)
 	{
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Itemlayer")
-            && item == null
+        ItemObject colliderItem = collision.GetComponent<ItemObject>();
+
+        if (colliderItem != null//collision.gameObject.layer == LayerMask.NameToLayer("Itemlayer")
+			&& item == null
             && collision.gameObject.transform.parent == null)
 		{
-			item = collision.gameObject;
-			var itemRigidbody = item.GetComponent<Rigidbody2D>();
-			itemRigidbody.bodyType = RigidbodyType2D.Kinematic;
-			itemRigidbody.velocity = Vector2.zero;
-            itemRigidbody.angularVelocity = 0;
+            item = colliderItem;//collision.gameObject;
+
+			item.Rigidbody.bodyType = RigidbodyType2D.Kinematic;
+			item.Rigidbody.velocity = Vector2.zero;
+			item.Rigidbody.angularVelocity = 0;
             collision.enabled = false;
 			MoveDown();
         }

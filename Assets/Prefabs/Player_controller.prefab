@@ -85,6 +85,7 @@ MonoBehaviour:
   speed: 5
   ItemOffset: {x: -0.67, y: 0.3, z: 0}
   itemcontroller: {fileID: 0}
+  WalkStraight: 0
   playerType: 0
   HoldItem: 0
   LookDirectionX: 0
