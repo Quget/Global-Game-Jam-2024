@@ -29,9 +29,12 @@ public class SpawnItem : MonoBehaviour
             rb = spawnedObject.AddComponent<Rigidbody2D>();
         }
 
-        rb.velocity = new Vector2(-conveyorSpeed, 0f);
+       
+        rb.AddForce(-transform.up * 200);
+        //rb.velocity = new Vector2(-conveyorSpeed, 0f);
 
-        spawnedObject.AddComponent<ConveyorItemController>();
+
+        //spawnedObject.AddComponent<ConveyorItemController>();
 
         Debug.Log("Spawned: " + spawnedObject.name);
     }

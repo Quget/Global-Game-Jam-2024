@@ -87,8 +87,10 @@ public class charactercontroller : MonoBehaviour
         }
 
         rigidBody.MovePosition(rigidBody.position + direction * Time.deltaTime * speed);
-        if (direction.x != 0) LookDirectionX = direction.x;
-        if (direction.y != 0) LookDirectionY = direction.y;
+        if (direction.x != 0) 
+            LookDirectionX = direction.x;
+        if (direction.y != 0) 
+            LookDirectionY = direction.y;
         //loop animatie starten
         if (direction.x != 0 || direction.y != 0) DirectionsMovement.SetFloat("Movement", 1);
         //loopanimatie stoppen
@@ -103,9 +105,10 @@ public class charactercontroller : MonoBehaviour
                 item.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                 DirectionsMovement.SetTrigger("Throw");
 
-                item.transform.parent = null;
-                item = null;
-            }
+				item.transform.parent = null;
+                item.transform.position = item.transform.position + (new Vector3(LookDirectionX, LookDirectionY,0) * 0.75f);
+				item = null;
+			}
             HoldItem = false;
         }
     }

@@ -154,12 +154,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GrijpArm: {fileID: 5528569882115095929}
-  Right_Player: {fileID: 0}
   PickupPoint: {fileID: 0}
   speed: 100
   itemHolder: {fileID: 8265822606246195456}
   TargetZone: {fileID: 7903610166542188366}
-  OffSet: {x: 0, y: -0.77, z: 0}
+  startY: 10.78
+  animator: {fileID: 1149814516102601479}
+  targetY: 6.84
+  force: 750
 --- !u!61 &8402174923133645068
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -297,6 +299,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0df085f53434f24cb68090b21aafdea, type: 3}
+--- !u!95 &1149814516102601479 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8406143372798736876, guid: a0df085f53434f24cb68090b21aafdea, type: 3}
+  m_PrefabInstance: {fileID: 8889095118742495979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1946150724836927925 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6944116507660520286, guid: a0df085f53434f24cb68090b21aafdea, type: 3}

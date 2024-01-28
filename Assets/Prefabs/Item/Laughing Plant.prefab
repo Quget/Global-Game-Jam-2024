@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3845201544241842810}
   - component: {fileID: 6722959366896848008}
   - component: {fileID: 2405539268214733632}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Laughing Plant
   m_TagString: Laughing Plant
   m_Icon: {fileID: 0}
