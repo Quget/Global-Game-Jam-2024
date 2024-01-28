@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class charactercontroller : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody2D rigidBody;
 
-    private GameObject item;
+    private ItemObject item;
 
     [SerializeField]
     private Transform itemHolder;
@@ -168,8 +169,9 @@ public class charactercontroller : MonoBehaviour
         {
             if (item != null)
             {
-                item.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                DirectionsMovement.SetTrigger("Throw");
+				item.Rigidbody.bodyType = RigidbodyType2D.Dynamic;
+				item.Collider.enabled = true;
+				DirectionsMovement.SetTrigger("Throw");
 
 				item.transform.parent = null;
                 item.transform.position = item.transform.position + (new Vector3(LookDirectionX, LookDirectionY,0) * 0.75f);
@@ -181,15 +183,20 @@ public class charactercontroller : MonoBehaviour
 
 private void OnCollisionStay2D(Collision2D collision)
 {
+
+        var colliderItem = collision.gameObject.GetComponent<ItemObject>();
         if (collision.gameObject.layer == LayerMask.NameToLayer("Itemlayer") 
             && HoldItem 
-            && item == null)
+            && colliderItem != null
+			&& item == null)
         {
 
             //Debug.Log("beetpakken");
-            item = collision.gameObject;
-            item.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-            item.transform.parent = itemHolder;
+            item = colliderItem;
+            item.Rigidbody.bodyType = RigidbodyType2D.Kinematic;
+            item.Collider.enabled = false;
+
+			item.transform.parent = itemHolder;
             item.transform.localPosition = Vector2.zero;
             DirectionsMovement.SetTrigger("Hold");
             
