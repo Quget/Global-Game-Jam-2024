@@ -83,7 +83,7 @@ public class charactercontroller : MonoBehaviour
                 if (Input.GetKey(KeyCode.DownArrow)) direction.y = -1;
                 if (Input.GetKey(KeyCode.LeftArrow)) direction.x = -1;
                 if (Input.GetKey(KeyCode.RightArrow)) direction.x = 1;
-                if (Input.GetKey(KeyCode.RightControl))
+                if (Input.GetKey(KeyCode.RightShift))
                 {
                     HoldItem = true;
                     //Debug.Log("holditem right");
