@@ -17,6 +17,7 @@ MonoBehaviour:
   LaughterStart: 50
   NewAssignmentAfterSecondsMin: 30
   NewAssignmentAfterSecondsMax: 45
+  correctAfterXSpawned: 2
   ItemObjects:
   - {fileID: 8368888104055569934, guid: 1e3356bdcd92f524e80e8827a4642d46, type: 3}
   - {fileID: 8368888104055569934, guid: 7dc2c764ec4cb6e4daedd545feba9eb2, type: 3}
@@ -66,20 +67,3 @@ MonoBehaviour:
     - Feather
     - FartCan
     ResultItemTag: WhoopieCushion
-  Items:
-  - {fileID: 5103857286426003732, guid: df3dd5445c1022c4b95758a31b45d797, type: 3}
-  - {fileID: 5103857286426003732, guid: d20be44391477f740bf590bf21a32a01, type: 3}
-  - {fileID: 5103857286426003732, guid: d57d59ee10611164a8d96b28464ddb52, type: 3}
-  - {fileID: 5103857286426003732, guid: 28dabc11636f8014ba5dc63a0a78fdc2, type: 3}
-  - {fileID: 5103857286426003732, guid: 3e87b1ef947f6634d822a9545edb8858, type: 3}
-  - {fileID: 5103857286426003732, guid: 4c664fbc20367c04599b76aa4f72055d, type: 3}
-  - {fileID: 5103857286426003732, guid: 38ba5beee1d54014c8229c7e39c4c842, type: 3}
-  CombinedItems:
-  - {fileID: 5103857286426003732, guid: 1e3356bdcd92f524e80e8827a4642d46, type: 3}
-  - {fileID: 5103857286426003732, guid: 7dc2c764ec4cb6e4daedd545feba9eb2, type: 3}
-  - {fileID: 5103857286426003732, guid: ddc3811599ebd9549a36d2b4b03af449, type: 3}
-  - {fileID: 5103857286426003732, guid: b5f2536ef0d1bd649abe29ddc170499c, type: 3}
-  - {fileID: 5103857286426003732, guid: ff5e9e8f2fa181c40bdaf5f365aefb7e, type: 3}
-  - {fileID: 5103857286426003732, guid: df4eb4124392d404986e04f3e3b02f22, type: 3}
-  - {fileID: 5103857286426003732, guid: f77bc2da889b67e4fa377b4e76a4315f, type: 3}
-  - {fileID: 5103857286426003732, guid: 6243ff374788d754eaf629939b2875e2, type: 3}

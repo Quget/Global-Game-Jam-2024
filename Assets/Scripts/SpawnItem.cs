@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class SpawnItem : MonoBehaviour
 {
     private GameValueService gameValueService;
+    private AssignmentService assignmentService;
     public float conveyorSpeed = 2f;
 
     private ItemObject[] items;
@@ -14,10 +16,13 @@ public class SpawnItem : MonoBehaviour
 	[SerializeField]
 	private AudioClip spawnSound = null;
 
+    private int spawnCount = 0;
+
 	void Start()
     {
         gameValueService = Services.Instance.GetService<GameValueService>();
-        items = gameValueService.GameValues.ItemObjects.Where(i => !i.IsCombinedItem).ToArray();
+        assignmentService = Services.Instance.GetService<AssignmentService>();
+		items = gameValueService.GameValues.ItemObjects.Where(i => !i.IsCombinedItem).ToArray();
         if (items.Length > 0)
         {
             InvokeRepeating("SpawnRandomObject", 0f, 5f);
@@ -28,15 +33,24 @@ public class SpawnItem : MonoBehaviour
     {
         int randomIndex = Random.Range(0, items.Length);
         ItemObject spawnedObject = Instantiate(items[randomIndex], transform.position, Quaternion.identity);
+
+        if (spawnCount == gameValueService.GameValues.correctAfterXSpawned)
+        {
+            var newItem = items.Where(e => e.tag == assignmentService.CurrentAssignment.ItemTags[Random.Range(0, assignmentService.CurrentAssignment.ItemTags.Length)]).FirstOrDefault();
+
+            if(newItem != null)
+            {
+                spawnedObject = newItem;
+			}
+			spawnCount = 0;
+		}
+
         spawnedObject.Throw(-transform.up * 200);
         if(spawnSound != null)
         {
 			AudioSource.PlayClipAtPoint(spawnSound, Camera.main.transform.position, 1);
 		}
-		
-		//rb.velocity = new Vector2(-conveyorSpeed, 0f);
-		//spawnedObject.AddComponent<ConveyorItemController>();
-
+        spawnCount++;
 	}
 
     public void StartSpawning()

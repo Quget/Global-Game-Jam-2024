@@ -16,8 +16,9 @@ public class ItemChecker : MonoBehaviour
 		_assignmentService = Services.Instance.GetService<AssignmentService>();
     }
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
+	//void OnTriggerEnter2D(Collider2D col)
+	void OnTriggerStay2D(Collider2D col)
+	{
 
         if (_assignmentService.CurrentAssignment.ResultItemTag != null 
 			&& col.gameObject.layer == LayerMask.NameToLayer("Itemlayer")

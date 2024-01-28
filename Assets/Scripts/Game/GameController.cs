@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
 
 		if (gameOverObject.activeInHierarchy || victoryObject.activeInHierarchy)
 		{
-			if (Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Delete))
+			if (Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Delete))
 			{
 				SceneManager.LoadScene(0);
 			}

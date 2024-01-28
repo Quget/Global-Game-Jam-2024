@@ -13,6 +13,8 @@ public class GameValuesScriptable :ScriptableObject
 	public int NewAssignmentAfterSecondsMin = 30;
 	public int NewAssignmentAfterSecondsMax = 50;
 
+	public int correctAfterXSpawned = 3;
+
 	public ItemObject[] ItemObjects;
 
 	public Assignment[] Assignments;
