@@ -83,7 +83,7 @@ public class charactercontroller : MonoBehaviour
                 if (Input.GetKey(KeyCode.DownArrow)) direction.y = -1;
                 if (Input.GetKey(KeyCode.LeftArrow)) direction.x = -1;
                 if (Input.GetKey(KeyCode.RightArrow)) direction.x = 1;
-                if (Input.GetKey(KeyCode.LeftControl))
+                if (Input.GetKey(KeyCode.RightControl))
                 {
                     HoldItem = true;
                     //Debug.Log("holditem right");
@@ -98,15 +98,7 @@ public class charactercontroller : MonoBehaviour
                 break;
         }
 
-        //kijkrichting hoofdje player instellen
-        //if (direction.y != 0)
-        //    LookDirectionX = -direction.y;
-        //else LookDirectionX = 0;
-        //if (direction.x != 0)
-        //    LookDirectionY = direction.x;
-        //else LookDirectionY = 0;
-
-
+        //kijkrichting van het hoofdje instellen
         if (direction.x < 0)
         {
             LookDirectionX = 0;
@@ -130,28 +122,36 @@ public class charactercontroller : MonoBehaviour
         //schuin lopen instellen als dit vinkje aan staat
         if (!WalkStraight)
         {
-            if ((direction.x != 0) || (direction.y != 0))
+            //if (direction.x != 0)
+            //{
+            //    direction.x += LoopHoekX; 
+            //}
+            //if (direction.y != 0)
+            //{
+            //    direction.y += LoopHoekY; 
+            //}
+            //if ((direction.x != 0) || (direction.y != 0))
             {
-                bool yAangepast = false;
-                if (direction.x < 0)
-                {
-                    direction.y = -1 + LoopHoekX;
-                    yAangepast = true;
-                }
+                //bool yAangepast = false;
+                //if (direction.x < 0)
+                //{
+                //    direction.y = -1 + LoopHoekX;
+                //    yAangepast = true;
+                //}
 
-                if (direction.x > 0)
-                {
-                    direction.y = 1 - LoopHoekX;
-                    yAangepast = true;
-                }
-                if (direction.y < 0 && !yAangepast)
-                {
-                    direction.x = 1 + LoopHoekY;
-                }
-                if (direction.y > 0 && !yAangepast)
-                {
-                    direction.x = -1 - LoopHoekY;
-                }
+                //if (direction.x > 0)
+                //{
+                //    direction.y = 1 - LoopHoekX;
+                //    yAangepast = true;
+                //}
+                //if (direction.y < 0 && !yAangepast)
+                //{
+                //    direction.x = 1 + LoopHoekY;
+                //}
+                //if (direction.y > 0 && !yAangepast)
+                //{
+                //    direction.x = -1 - LoopHoekY;
+                //}
             }
         }
 
