@@ -14,12 +14,24 @@ public class charactercontroller : MonoBehaviour
 
     [SerializeField]
     private Animator DirectionsMovement;
+
     [SerializeField]
-    public float speed = 5f;
+    public float speed = -0.47f;
+
     [SerializeField]
     public Vector3 ItemOffset = new Vector3(-0.67f, 0.3f, 0);
+
     [SerializeField]
     private ItemController itemcontroller;
+
+    [SerializeField]
+    private bool WalkStraight;
+
+    [SerializeField]
+    private float LoopHoekX = 0.35f;
+
+    [SerializeField]
+    private float LoopHoekY = 0.65f;
 
     public enum PlayerType { left, right };
     public PlayerType playerType;
@@ -71,7 +83,7 @@ public class charactercontroller : MonoBehaviour
                 if (Input.GetKey(KeyCode.DownArrow)) direction.y = -1;
                 if (Input.GetKey(KeyCode.LeftArrow)) direction.x = -1;
                 if (Input.GetKey(KeyCode.RightArrow)) direction.x = 1;
-                if (Input.GetKey(KeyCode.RightShift))
+                if (Input.GetKey(KeyCode.LeftControl))
                 {
                     HoldItem = true;
                     //Debug.Log("holditem right");
@@ -86,11 +98,65 @@ public class charactercontroller : MonoBehaviour
                 break;
         }
 
+        //kijkrichting hoofdje player instellen
+        //if (direction.y != 0)
+        //    LookDirectionX = -direction.y;
+        //else LookDirectionX = 0;
+        //if (direction.x != 0)
+        //    LookDirectionY = direction.x;
+        //else LookDirectionY = 0;
+
+
+        if (direction.x < 0)
+        {
+            LookDirectionX = 0;
+            LookDirectionY = -1;
+        }
+        if (direction.y > 0)
+        {
+            LookDirectionX = -1;
+            LookDirectionY = 0;
+        }
+        if (direction.x > 0)
+        {
+            LookDirectionX = 0;
+            LookDirectionY = 0;
+        }
+        if(direction.y < 0)
+        {
+            LookDirectionX = 1;
+            LookDirectionY = -1;
+        }
+        //schuin lopen instellen als dit vinkje aan staat
+        if (!WalkStraight)
+        {
+            if ((direction.x != 0) || (direction.y != 0))
+            {
+                bool yAangepast = false;
+                if (direction.x < 0)
+                {
+                    direction.y = -1 + LoopHoekX;
+                    yAangepast = true;
+                }
+
+                if (direction.x > 0)
+                {
+                    direction.y = 1 - LoopHoekX;
+                    yAangepast = true;
+                }
+                if (direction.y < 0 && !yAangepast)
+                {
+                    direction.x = 1 + LoopHoekY;
+                }
+                if (direction.y > 0 && !yAangepast)
+                {
+                    direction.x = -1 - LoopHoekY;
+                }
+            }
+        }
+
         rigidBody.MovePosition(rigidBody.position + direction * Time.deltaTime * speed);
-        if (direction.x != 0) 
-            LookDirectionX = direction.x;
-        if (direction.y != 0) 
-            LookDirectionY = direction.y;
+        
         //loop animatie starten
         if (direction.x != 0 || direction.y != 0) DirectionsMovement.SetFloat("Movement", 1);
         //loopanimatie stoppen
